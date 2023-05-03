@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for i in obj %}
+    <div class="col-md-6 col-lg-4" style="padding-top: 25px;">
+      <div class="card" >
+        <div class="card-header">
+          <h5>ID:{{i.id}}</h5>
+        </div>
+        <div class="card-body">
+<!--          {% for image in i.img %}-->
+<!--          <img src="{{ image }}" alt="{{ image.title }}" class="img-fluid mb-2">-->
+<!--          {% endfor %}-->
+          <p style="color:green;">likes:{{i.likes}}</p>
+          <p style="color:red;">dislikes:{{i.unlike}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "c68fb799-5b0a-48bd-8ee2-0c85dec1d261",
+		"name": "POSTAPP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21655023",
+		"_collection_link": "https://texolworld.postman.co/workspace/Kaser---Skippy~edec4d19-caec-4840-9180-d56ca1945ebe/collection/21655023-c68fb799-5b0a-48bd-8ee2-0c85dec1d261?action=share&creator=21655023&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "jali",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"register",
+						""
+					]
+				},
+				"description": "This api is for register a new user to Postapp.\r\nusername and password need to pass as form data"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "jali",
+							"description": "required",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234",
+							"description": "required",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"login",
+						""
+					]
+				},
+				"description": "Api for login a user.username and password is required,these fields are passed as formdata\r\n\r\nformdata:username,password\r\n        "
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"logout",
+						""
+					]
+				},
+				"description": "To logout the current login user"
+			},
+			"response": []
+		},
+		{
+			"name": "ViewAllPost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/posts/?pageitems=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"posts",
+						""
+					],
+					"query": [
+						{
+							"key": "pageitems",
+							"value": "2",
+							"description": "optional"
+						}
+					]
+				},
+				"description": "This api is for for see all posts.\r\nIn this api if the user doesn't like any post then it show all the post.if the logined user like a post previously then it shows the similar post based on the previous posts tag weights.\r\nAlso if the user previously dislike a post then it doesn't show that post anymore\r\n\r\nparameters: pageitems\r\nit's used for how many post want in each request.its optional if you don't give any value then it shows all filtered posts"
+			},
+			"response": []
+		},
+		{
+			"name": "Like a Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/like/?id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"like",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "required(id of a post)"
+						}
+					]
+				},
+				"description": "this api is to like a Post that we want.Here the id param is required(id of a post).\n\nIn this api if we like a post that we disliked before then its count of dislike of that post get decremented and count of likes get incremented\n\nparam: id(required,id of a post that we want to like)"
+			},
+			"response": []
+		},
+		{
+			"name": "Unlike a Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/unlike/?id=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"unlike",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "id of a post"
+						}
+					]
+				},
+				"description": "this api is to unlike a Post that we want.Here the id param is required(id of post).\r\n\r\nIn this api if we unlike a post that we liked before then its count of like of that post get decremented and count of dislikes get incremented\r\n\r\nparam: id(required,id of which post want to dislike)"
+			},
+			"response": []
+		},
+		{
+			"name": "LikedUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/likedusers/?id=1&pageitems",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"likedusers",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "id of post"
+						},
+						{
+							"key": "pageitems",
+							"value": null,
+							"description": "optional(count of objects need in each page)"
+						}
+					]
+				},
+				"description": "This api shows the complete users who likes a post tha we want to know.  \nhere id of a post is passed as param\n\nparam:id(required,id of post that we want to know  \n\npageitems(optional,how much items need in each page,if don't give it shows full items)"
+			},
+			"response": []
+		}
+	]
+}

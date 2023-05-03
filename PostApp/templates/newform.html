@@ -1,0 +1,91 @@
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .card {
+    width: 500px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .card-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+</style>
+
+<div class="container">
+
+
+
+  <div class="card">
+    <div class="card-header">Add Post</div>
+    {% if messages %}
+        {% for message in messages %}
+          <h4 style="text-align: center;color:red">{{ message.message }}</h4>
+        {% endfor %}
+    {% endif %}
+    <div class="card-body">
+
+      <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+          <label for="images">Images:</label>
+          <div id="images-container">
+
+            <input type="file" name="images[]" ><br><br>
+          </div>
+          <button type="button" id="add-image">Add image</button><br><br>
+          <label for="description">Description:</label><br>
+          <textarea name="description" id="description"></textarea><br><br>
+          <label for="tags">Tags:</label><br>
+          <div id="tags-container">
+            <div class="tag">
+              <input type="text" name="tags[]" placeholder="Tag name">
+              <input type="number" name="weights[]" placeholder="Weight">
+            </div>
+          </div>
+          <button type="button" id="add-tag">Add tag</button><br><br>
+          <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+  // Add new image fields when the "Add image" button is clicked
+  document.getElementById('add-image').addEventListener('click', function(event) {
+    event.preventDefault();
+    var container = document.getElementById('images-container');
+    var image = document.createElement('input');
+    image.type = 'file';
+    image.name = 'images[]';
+    container.appendChild(image);
+    container.appendChild(document.createElement('br'));
+  });
+
+  // Add new tag fields when the "Add tag" button is clicked
+  document.getElementById('add-tag').addEventListener('click', function(event) {
+    event.preventDefault();
+    var container = document.getElementById('tags-container');
+    var tag = document.createElement('div');
+    tag.classList.add('tag');
+    tag.innerHTML = `
+      <input type="text" name="tags[]" placeholder="Tag name">
+      <input type="number" name="weights[]" placeholder="Weight">
+    `;
+    container.appendChild(tag);
+  });
+</script>
