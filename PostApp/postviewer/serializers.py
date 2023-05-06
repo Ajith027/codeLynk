@@ -19,20 +19,19 @@ class PostSerializer(serializers.Serializer):
         img_obj = Images.objects.filter(post_id=obj)
         serializer = ImageSerializer(img_obj,many=True)
         return serializer.data
-
     def get_liked(self,obj):
         try:
-            ob = ViewedPost.objects.get(post_id=obj)
+            ob = ViewedPost.objects.get(post_id=obj.id)
+            return ob.like
         except:
-            return None
-        return ob.like
-
+            return False
     def get_disliked(self,obj):
         try:
             ob = ViewedPost.objects.get(post_id=obj)
+            return ob.unlike
         except:
-            return None
-        return ob.unlike
+            return False
+
 
     def to_representation(self, instance):
         data = super(PostSerializer, self).to_representation(instance)
@@ -43,8 +42,6 @@ class PostSerializer(serializers.Serializer):
 
 class UserSerializer(serializers.Serializer):
     username = serializers.SerializerMethodField()
-
     def get_username(self,obj):
         name = obj.user.username
         return name
-
